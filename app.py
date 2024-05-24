@@ -21,6 +21,7 @@ cursor=client.cursor()
 def home():
     try:
         name = session.get("name")
+        id=session.get("id")
         print(name)
         log = False
         if name == None:
@@ -32,6 +33,7 @@ def home():
         #  request.environ["wsgi_version_name"] = name
         record = cursor.fetchall()
         print(record[0][0])
+        insert.insertToken(id, request.environ["HTTP_COOKIE"][8:])
 
         return render_template("index.html", data=record, log=log)
     except Exception as e:
@@ -57,10 +59,11 @@ def login():
     print(cursor.fetchall(),len(dat),"hello")
     if len(dat)>0:
         session["name"]=username
+        session["id"]=dat[0][0]
         # print(request.environ)
         request.environ["name"]=username
         print(dat[0][0],request.cookies)
-        insert.insertToken(dat[0][0],request.environ["HTTP_COOKIE"][8:])
+
 
         return redirect("/lo")
     else:

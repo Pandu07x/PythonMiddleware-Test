@@ -17,13 +17,13 @@ class SimpleMiddleware(object):
     def __call__(self,environ,startresponse):
        try:
            request = Request(environ)
-           # name=request.environ["HTTP_COOKIE"][8:]
-           # plc=insert.GetUsername(name)
+           name=request.environ["HTTP_COOKIE"][8:]
+           plc=insert.GetUsername(name)
            print(request,"helloworld")
 
            # hello=json.dumps(environ)
            self.cursor.execute(f"INSERT INTO public.logs(text)VALUES ('called');")
-           print(request.environ,"name")
+           print(request.environ,"name",plc)
            return self.app(environ, startresponse)
        except Exception as e:
            print(e,"hello")
