@@ -1,0 +1,22 @@
+{% if log %}
+{%include "pop.html" %}
+{% endif %}
+<h1>Hello worldw</h1>
+<table>
+    <tr>
+        <th>username</th>
+        <th>password</th>
+    </tr>
+     {% for i in data %}
+  <tr>
+
+      <td>{{i[1]}}</td>
+      <td>{{i[2]}}</td>
+
+
+
+  </tr>
+    {% endfor %}
+</table>
+
+
